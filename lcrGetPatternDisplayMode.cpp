@@ -2,11 +2,11 @@
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
-	if (nrhs > 0)
-	{
-		mexErrMsgIdAndTxt("lcr:usage", "Usage: external = lcrGetPatternDisplayMode()");
-		return;
-	}
+    if (nrhs > 0)
+    {
+        mexErrMsgIdAndTxt("lcr:usage", "Usage: external = lcrGetPatternDisplayMode()");
+        return;
+    }
     
     bool external;
     int result = LCR_GetPatternDisplayMode(&external);

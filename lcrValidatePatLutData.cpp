@@ -2,11 +2,11 @@
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
-	if (nrhs > 0)
-	{
-		mexErrMsgIdAndTxt("lcr:usage", "Usage: status = lcrValidatePatLutData()");
-		return;
-	}
+    if (nrhs > 0)
+    {
+        mexErrMsgIdAndTxt("lcr:usage", "Usage: status = lcrValidatePatLutData()");
+        return;
+    }
     
     unsigned int status;
     int result = LCR_ValidatePatLutData(&status);

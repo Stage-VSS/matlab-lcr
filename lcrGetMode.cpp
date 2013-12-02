@@ -2,11 +2,11 @@
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
-	if (nrhs > 0)
-	{
-		mexErrMsgIdAndTxt("lcr:usage", "Usage: mode = lcrGetMode()");
-		return;
-	}
+    if (nrhs > 0)
+    {
+        mexErrMsgIdAndTxt("lcr:usage", "Usage: mode = lcrGetMode()");
+        return;
+    }
     
     bool mode;
     int result = LCR_GetMode(&mode);

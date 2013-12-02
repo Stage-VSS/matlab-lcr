@@ -2,11 +2,11 @@
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
-	if (nrhs > 0)
-	{
-		mexErrMsgIdAndTxt("lcr:usage", "Usage: intExtOrVsync = lcrGetPatternTriggerMode()");
-		return;
-	}
+    if (nrhs > 0)
+    {
+        mexErrMsgIdAndTxt("lcr:usage", "Usage: intExtOrVsync = lcrGetPatternTriggerMode()");
+        return;
+    }
     
     bool intExtOrVsync;
     int result = LCR_GetPatternTriggerMode(&intExtOrVsync);
