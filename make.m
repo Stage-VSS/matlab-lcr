@@ -1,24 +1,24 @@
-function lcrMake(rebuild)
+function make(rebuild)
     if nargin < 1
         rebuild = false;
     end
 
     filePath = mfilename('fullpath');
-    lcrDir = fileparts(filePath);
+    projectDir = fileparts(filePath);
     
     currentDir = pwd;
     returnToDir = onCleanup(@()cd(currentDir));
-    cd(lcrDir);
+    cd(projectDir);
     
     opts = '';
-    opts = [opts ' -I' fullfile(lcrDir, 'api')];
-    opts = [opts ' -L' fullfile(lcrDir) ' -llcr'];
+    opts = [opts ' -I' fullfile(projectDir, 'api')];
+    opts = [opts ' -L' fullfile(projectDir) ' -llcr'];
     
     if ismac
-        opts = [opts ' -f ' fullfile(lcrDir, 'mexopts.10.9.sh')];
+        opts = [opts ' -f ' fullfile(projectDir, 'mexopts.10.9.sh')];
     end
     
-    sourceFiles = dir(fullfile(lcrDir, '*.cpp'));
+    sourceFiles = dir(fullfile(projectDir, '*.cpp'));
     for i = 1:length(sourceFiles)
         source = sourceFiles(i);
         
