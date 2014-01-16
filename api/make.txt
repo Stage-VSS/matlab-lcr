@@ -3,3 +3,6 @@ g++ -dynamiclib -undefined suppress -flat_namespace API.cpp usb.cpp hidapi-maste
 
 When you build the mex files, these options need to be included in LDFLAGS:
 -Xlinker -rpath -Xlinker `pwd`
+
+To build the dll (Windows only):
+cl /Felcr /I hidapi-master/hidapi API.cpp usb.cpp hidapi-master/windows/hid.c SetupAPI.lib /LD

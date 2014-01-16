@@ -48,6 +48,14 @@
 #define STAT_BIT_FLASH_BUSY     BIT3
 #define HID_MESSAGE_MAX_SIZE    512
 
+#ifdef _WIN32
+      #define API_API_EXPORT __declspec(dllexport)
+      #define API_API_CALL
+#else
+      #define API_API_EXPORT /**< API export macro */
+      #define API_API_CALL /**< API call macro */
+#endif
+
 typedef struct _hidmessageStruct
 {
     struct _hidhead
@@ -162,97 +170,96 @@ typedef enum
     BL_PROG_MODE,
 }LCR_CMD;
 
-int LCR_SetInputSource(unsigned int source, unsigned int portWidth);
-int LCR_GetInputSource(unsigned int *pSource, unsigned int *portWidth);
-int LCR_SetPixelFormat(unsigned int format);
-int LCR_GetPixelFormat(unsigned int *pFormat);
-int LCR_SetPortClock(unsigned int clock);
-int LCR_GetPortClock(unsigned int *pClock);
-int LCR_SetDataChannelSwap(unsigned int port, unsigned int swap);
-int LCR_GetDataChannelSwap(unsigned int *pPort, unsigned int *pSwap);
-int LCR_SetFPD_Mode_Field(unsigned int PixelMappingMode, bool SwapPolarity, unsigned int FieldSignalSelect);
-int LCR_GetFPD_Mode_Field(unsigned int *pPixelMappingMode, bool *pSwapPolarity, unsigned int *pFieldSignalSelect);
-int LCR_SetPowerMode(bool);
-int LCR_SetLongAxisImageFlip(bool);
-bool LCR_GetLongAxisImageFlip();
-int LCR_SetShortAxisImageFlip(bool);
-bool LCR_GetShortAxisImageFlip();
-int LCR_SetTPGSelect(unsigned int pattern);
-int LCR_GetTPGSelect(unsigned int *pPattern);
-int LCR_SetLEDPWMInvert(bool invert);
-int LCR_GetLEDPWMInvert(bool *inverted);
-int LCR_SetLedEnables(bool SeqCtrl, bool Red, bool Green, bool Blue);
-int LCR_GetLedEnables(bool *pSeqCtrl, bool *pRed, bool *pGreen, bool *pBlue);
-int LCR_GetVersion(unsigned int *pApp_ver, unsigned int *pAPI_ver, unsigned int *pSWConfig_ver, unsigned int *pSeqConfig_ver);
-int LCR_SoftwareReset(void);
-int LCR_GetStatus(unsigned char *pHWStatus, unsigned char *pSysStatus, unsigned char *pMainStatus);
-int LCR_SetPWMEnable(unsigned int channel, bool Enable);
-int LCR_GetPWMEnable(unsigned int channel, bool *pEnable);
-int LCR_SetPWMConfig(unsigned int channel, unsigned int pulsePeriod, unsigned int dutyCycle);
-int LCR_GetPWMConfig(unsigned int channel, unsigned int *pPulsePeriod, unsigned int *pDutyCycle);
-int LCR_SetPWMCaptureConfig(unsigned int channel, bool enable, unsigned int sampleRate);
-int LCR_GetPWMCaptureConfig(unsigned int channel, bool *pEnabled, unsigned int *pSampleRate);
-int LCR_SetGPIOConfig(unsigned int pinNum, bool enAltFunc, bool altFunc1, bool dirOutput, bool outTypeOpenDrain, bool pinState);
-int LCR_GetGPIOConfig(unsigned int pinNum, bool *pEnAltFunc, bool *pAltFunc1, bool *pDirOutput, bool *pOutTypeOpenDrain, bool *pState);
-int LCR_GetLedCurrents(unsigned char *pRed, unsigned char *pGreen, unsigned char *pBlue);
-int LCR_SetLedCurrents(unsigned char RedCurrent, unsigned char GreenCurrent, unsigned char BlueCurrent);
-int LCR_SetDisplay(rectangle croppedArea, rectangle displayArea);
-int LCR_GetDisplay(rectangle *pCroppedArea, rectangle *pDisplayArea);
-int LCR_MemRead(unsigned int addr, unsigned int *readWord);
-int LCR_MemWrite(unsigned int addr, unsigned int data);
-int LCR_ValidatePatLutData(unsigned int *pStatus);
-int LCR_SetPatternDisplayMode(bool external);
-int LCR_GetPatternDisplayMode(bool *external);
-int LCR_SetTrigOutConfig(unsigned int trigOutNum, bool invert, unsigned int rising, unsigned int falling);
-int LCR_GetTrigOutConfig(unsigned int trigOutNum, bool *pInvert,unsigned int *pRising, unsigned int *pFalling);
-int LCR_SetRedLEDStrobeDelay(unsigned char rising, unsigned char falling);
-int LCR_SetGreenLEDStrobeDelay(unsigned char rising, unsigned char falling);
-int LCR_SetBlueLEDStrobeDelay(unsigned char rising, unsigned char falling);
-int LCR_GetRedLEDStrobeDelay(unsigned char *, unsigned char *);
-int LCR_GetGreenLEDStrobeDelay(unsigned char *, unsigned char *);
-int LCR_GetBlueLEDStrobeDelay(unsigned char *, unsigned char *);
-int LCR_EnterProgrammingMode(void);
-int LCR_ExitProgrammingMode(void);
-int LCR_GetProgrammingMode(bool *ProgMode);
-int LCR_GetFlashManID(unsigned short *manID);
-int LCR_GetFlashDevID(unsigned long long *devID);
-int LCR_GetBLStatus(unsigned char *BL_Status);
-int LCR_SetFlashAddr(unsigned int Addr);
-int LCR_FlashSectorErase(void);
-int LCR_SetDownloadSize(unsigned int dataLen);
-int LCR_DownloadData(unsigned char *pByteArray, unsigned int dataLen);
-void LCR_WaitForFlashReady(void);
-int LCR_SetFlashType(unsigned char Type);
-int LCR_CalculateFlashChecksum(void);
-int LCR_GetFlashChecksum(unsigned int*checksum);
-int LCR_SetMode(bool SLmode);
-int LCR_GetMode(bool *pMode);
-int LCR_LoadSplash(unsigned int index);
-int LCR_GetSplashIndex(unsigned int *pIndex);
-int LCR_SetTPGColor(unsigned short redFG, unsigned short greenFG, unsigned short blueFG, unsigned short redBG, unsigned short greenBG, unsigned short blueBG);
-int LCR_GetTPGColor(unsigned short *pRedFG, unsigned short *pGreenFG, unsigned short *pBlueFG, unsigned short *pRedBG, unsigned short *pGreenBG, unsigned short *pBlueBG);
-int LCR_ClearPatLut(void);
-int LCR_AddToPatLut(int TrigType, int PatNum,int BitDepth,int LEDSelect,bool InvertPat, bool InsertBlack,bool BufSwap, bool trigOutPrev);
-int LCR_GetPatLutItem(int index, int *pTrigType, int *pPatNum,int *pBitDepth,int *pLEDSelect,bool *pInvertPat, bool *pInsertBlack,bool *pBufSwap, bool *pTrigOutPrev);
-int LCR_SendPatLut(void);
-int LCR_SendSplashLut(unsigned char *lutEntries, unsigned int numEntries);
-int LCR_GetPatLut(int numEntries);
-int LCR_GetSplashLut(unsigned char *pLut, int numEntries);
-int LCR_SetPatternTriggerMode(bool);
-int LCR_GetPatternTriggerMode(bool *);
-int LCR_PatternDisplay(int Action);
-int LCR_SetPatternConfig(unsigned int numLutEntries, bool repeat, unsigned int numPatsForTrigOut2, unsigned int numSplash);
-int LCR_GetPatternConfig(unsigned int *pNumLutEntries, bool *pRepeat, unsigned int *pNumPatsForTrigOut2, unsigned int *pNumSplash);
-int LCR_SetExposure_FramePeriod(unsigned int exposurePeriod, unsigned int framePeriod);
-int LCR_GetExposure_FramePeriod(unsigned int *pExposure, unsigned int *pFramePeriod);
-int LCR_SetTrigIn1Delay(unsigned int Delay);
-int LCR_GetTrigIn1Delay(unsigned int *pDelay);
-int LCR_SetInvertData(bool invert);
-int LCR_PWMCaptureRead(unsigned int channel, unsigned int *pLowPeriod, unsigned int *pHighPeriod);
-int LCR_SetGeneralPurposeClockOutFreq(unsigned int clkId, bool enable, unsigned int clkDivider);
-int LCR_GetGeneralPurposeClockOutFreq(unsigned int clkId, bool *pEnabled, unsigned int *pClkDivider);
-int LCR_MeasureSplashLoadTiming(unsigned int startIndex, unsigned int numSplash);
-int LCR_ReadSplashLoadTiming(unsigned int *pTimingData);
-
+int API_API_EXPORT LCR_SetInputSource(unsigned int source, unsigned int portWidth);
+int API_API_EXPORT LCR_GetInputSource(unsigned int *pSource, unsigned int *portWidth);
+int API_API_EXPORT LCR_SetPixelFormat(unsigned int format);
+int API_API_EXPORT LCR_GetPixelFormat(unsigned int *pFormat);
+int API_API_EXPORT LCR_SetPortClock(unsigned int clock);
+int API_API_EXPORT LCR_GetPortClock(unsigned int *pClock);
+int API_API_EXPORT LCR_SetDataChannelSwap(unsigned int port, unsigned int swap);
+int API_API_EXPORT LCR_GetDataChannelSwap(unsigned int *pPort, unsigned int *pSwap);
+int API_API_EXPORT LCR_SetFPD_Mode_Field(unsigned int PixelMappingMode, bool SwapPolarity, unsigned int FieldSignalSelect);
+int API_API_EXPORT LCR_GetFPD_Mode_Field(unsigned int *pPixelMappingMode, bool *pSwapPolarity, unsigned int *pFieldSignalSelect);
+int API_API_EXPORT LCR_SetPowerMode(bool);
+int API_API_EXPORT LCR_SetLongAxisImageFlip(bool);
+bool API_API_EXPORT LCR_GetLongAxisImageFlip();
+int API_API_EXPORT LCR_SetShortAxisImageFlip(bool);
+bool API_API_EXPORT LCR_GetShortAxisImageFlip();
+int API_API_EXPORT LCR_SetTPGSelect(unsigned int pattern);
+int API_API_EXPORT LCR_GetTPGSelect(unsigned int *pPattern);
+int API_API_EXPORT LCR_SetLEDPWMInvert(bool invert);
+int API_API_EXPORT LCR_GetLEDPWMInvert(bool *inverted);
+int API_API_EXPORT LCR_SetLedEnables(bool SeqCtrl, bool Red, bool Green, bool Blue);
+int API_API_EXPORT LCR_GetLedEnables(bool *pSeqCtrl, bool *pRed, bool *pGreen, bool *pBlue);
+int API_API_EXPORT LCR_GetVersion(unsigned int *pApp_ver, unsigned int *pAPI_ver, unsigned int *pSWConfig_ver, unsigned int *pSeqConfig_ver);
+int API_API_EXPORT LCR_SoftwareReset(void);
+int API_API_EXPORT LCR_GetStatus(unsigned char *pHWStatus, unsigned char *pSysStatus, unsigned char *pMainStatus);
+int API_API_EXPORT LCR_SetPWMEnable(unsigned int channel, bool Enable);
+int API_API_EXPORT LCR_GetPWMEnable(unsigned int channel, bool *pEnable);
+int API_API_EXPORT LCR_SetPWMConfig(unsigned int channel, unsigned int pulsePeriod, unsigned int dutyCycle);
+int API_API_EXPORT LCR_GetPWMConfig(unsigned int channel, unsigned int *pPulsePeriod, unsigned int *pDutyCycle);
+int API_API_EXPORT LCR_SetPWMCaptureConfig(unsigned int channel, bool enable, unsigned int sampleRate);
+int API_API_EXPORT LCR_GetPWMCaptureConfig(unsigned int channel, bool *pEnabled, unsigned int *pSampleRate);
+int API_API_EXPORT LCR_SetGPIOConfig(unsigned int pinNum, bool enAltFunc, bool altFunc1, bool dirOutput, bool outTypeOpenDrain, bool pinState);
+int API_API_EXPORT LCR_GetGPIOConfig(unsigned int pinNum, bool *pEnAltFunc, bool *pAltFunc1, bool *pDirOutput, bool *pOutTypeOpenDrain, bool *pState);
+int API_API_EXPORT LCR_GetLedCurrents(unsigned char *pRed, unsigned char *pGreen, unsigned char *pBlue);
+int API_API_EXPORT LCR_SetLedCurrents(unsigned char RedCurrent, unsigned char GreenCurrent, unsigned char BlueCurrent);
+int API_API_EXPORT LCR_SetDisplay(rectangle croppedArea, rectangle displayArea);
+int API_API_EXPORT LCR_GetDisplay(rectangle *pCroppedArea, rectangle *pDisplayArea);
+int API_API_EXPORT LCR_MemRead(unsigned int addr, unsigned int *readWord);
+int API_API_EXPORT LCR_MemWrite(unsigned int addr, unsigned int data);
+int API_API_EXPORT LCR_ValidatePatLutData(unsigned int *pStatus);
+int API_API_EXPORT LCR_SetPatternDisplayMode(bool external);
+int API_API_EXPORT LCR_GetPatternDisplayMode(bool *external);
+int API_API_EXPORT LCR_SetTrigOutConfig(unsigned int trigOutNum, bool invert, unsigned int rising, unsigned int falling);
+int API_API_EXPORT LCR_GetTrigOutConfig(unsigned int trigOutNum, bool *pInvert,unsigned int *pRising, unsigned int *pFalling);
+int API_API_EXPORT LCR_SetRedLEDStrobeDelay(unsigned char rising, unsigned char falling);
+int API_API_EXPORT LCR_SetGreenLEDStrobeDelay(unsigned char rising, unsigned char falling);
+int API_API_EXPORT LCR_SetBlueLEDStrobeDelay(unsigned char rising, unsigned char falling);
+int API_API_EXPORT LCR_GetRedLEDStrobeDelay(unsigned char *, unsigned char *);
+int API_API_EXPORT LCR_GetGreenLEDStrobeDelay(unsigned char *, unsigned char *);
+int API_API_EXPORT LCR_GetBlueLEDStrobeDelay(unsigned char *, unsigned char *);
+int API_API_EXPORT LCR_EnterProgrammingMode(void);
+int API_API_EXPORT LCR_ExitProgrammingMode(void);
+int API_API_EXPORT LCR_GetProgrammingMode(bool *ProgMode);
+int API_API_EXPORT LCR_GetFlashManID(unsigned short *manID);
+int API_API_EXPORT LCR_GetFlashDevID(unsigned long long *devID);
+int API_API_EXPORT LCR_GetBLStatus(unsigned char *BL_Status);
+int API_API_EXPORT LCR_SetFlashAddr(unsigned int Addr);
+int API_API_EXPORT LCR_FlashSectorErase(void);
+int API_API_EXPORT LCR_SetDownloadSize(unsigned int dataLen);
+int API_API_EXPORT LCR_DownloadData(unsigned char *pByteArray, unsigned int dataLen);
+void API_API_EXPORT LCR_WaitForFlashReady(void);
+int API_API_EXPORT LCR_SetFlashType(unsigned char Type);
+int API_API_EXPORT LCR_CalculateFlashChecksum(void);
+int API_API_EXPORT LCR_GetFlashChecksum(unsigned int*checksum);
+int API_API_EXPORT LCR_SetMode(bool SLmode);
+int API_API_EXPORT LCR_GetMode(bool *pMode);
+int API_API_EXPORT LCR_LoadSplash(unsigned int index);
+int API_API_EXPORT LCR_GetSplashIndex(unsigned int *pIndex);
+int API_API_EXPORT LCR_SetTPGColor(unsigned short redFG, unsigned short greenFG, unsigned short blueFG, unsigned short redBG, unsigned short greenBG, unsigned short blueBG);
+int API_API_EXPORT LCR_GetTPGColor(unsigned short *pRedFG, unsigned short *pGreenFG, unsigned short *pBlueFG, unsigned short *pRedBG, unsigned short *pGreenBG, unsigned short *pBlueBG);
+int API_API_EXPORT LCR_ClearPatLut(void);
+int API_API_EXPORT LCR_AddToPatLut(int TrigType, int PatNum,int BitDepth,int LEDSelect,bool InvertPat, bool InsertBlack,bool BufSwap, bool trigOutPrev);
+int API_API_EXPORT LCR_GetPatLutItem(int index, int *pTrigType, int *pPatNum,int *pBitDepth,int *pLEDSelect,bool *pInvertPat, bool *pInsertBlack,bool *pBufSwap, bool *pTrigOutPrev);
+int API_API_EXPORT LCR_SendPatLut(void);
+int API_API_EXPORT LCR_SendSplashLut(unsigned char *lutEntries, unsigned int numEntries);
+int API_API_EXPORT LCR_GetPatLut(int numEntries);
+int API_API_EXPORT LCR_GetSplashLut(unsigned char *pLut, int numEntries);
+int API_API_EXPORT LCR_SetPatternTriggerMode(bool);
+int API_API_EXPORT LCR_GetPatternTriggerMode(bool *);
+int API_API_EXPORT LCR_PatternDisplay(int Action);
+int API_API_EXPORT LCR_SetPatternConfig(unsigned int numLutEntries, bool repeat, unsigned int numPatsForTrigOut2, unsigned int numSplash);
+int API_API_EXPORT LCR_GetPatternConfig(unsigned int *pNumLutEntries, bool *pRepeat, unsigned int *pNumPatsForTrigOut2, unsigned int *pNumSplash);
+int API_API_EXPORT LCR_SetExposure_FramePeriod(unsigned int exposurePeriod, unsigned int framePeriod);
+int API_API_EXPORT LCR_GetExposure_FramePeriod(unsigned int *pExposure, unsigned int *pFramePeriod);
+int API_API_EXPORT LCR_SetTrigIn1Delay(unsigned int Delay);
+int API_API_EXPORT LCR_GetTrigIn1Delay(unsigned int *pDelay);
+int API_API_EXPORT LCR_SetInvertData(bool invert);
+int API_API_EXPORT LCR_PWMCaptureRead(unsigned int channel, unsigned int *pLowPeriod, unsigned int *pHighPeriod);
+int API_API_EXPORT LCR_SetGeneralPurposeClockOutFreq(unsigned int clkId, bool enable, unsigned int clkDivider);
+int API_API_EXPORT LCR_GetGeneralPurposeClockOutFreq(unsigned int clkId, bool *pEnabled, unsigned int *pClkDivider);
+int API_API_EXPORT LCR_MeasureSplashLoadTiming(unsigned int startIndex, unsigned int numSplash);
+int API_API_EXPORT LCR_ReadSplashLoadTiming(unsigned int *pTimingData);
 
 #endif // API_H

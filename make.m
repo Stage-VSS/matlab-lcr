@@ -11,8 +11,8 @@ function make(rebuild)
     cd(projectDir);
     
     opts = '';
-    opts = [opts ' -I' fullfile(projectDir, 'api')];
-    opts = [opts ' -L' fullfile(projectDir) ' -llcr'];
+    opts = [opts ' -I"' fullfile(projectDir, 'api') '"'];
+    opts = [opts ' -L"' fullfile(projectDir) '" -llcr'];
     
     if ismac
         opts = [opts ' -f ' fullfile(projectDir, 'mexopts.10.9.sh')];
