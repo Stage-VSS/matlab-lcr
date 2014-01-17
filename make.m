@@ -15,7 +15,7 @@ function make(rebuild)
     opts = [opts ' -L"' fullfile(projectDir) '" -llcr'];
     
     if ismac
-        opts = [opts ' -f ' fullfile(projectDir, 'mexopts.10.9.sh')];
+        opts = [opts ' LDFLAGS="\$LDFLAGS -Xlinker -rpath -Xlinker `pwd`"'];
     end
     
     sourceFiles = dir(fullfile(projectDir, '*.cpp'));
