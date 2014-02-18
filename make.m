@@ -15,7 +15,7 @@ function make(rebuild)
     opts = [opts ' -L"' fullfile(projectDir) '" -llcr'];
     
     if ismac
-        opts = [opts ' LDFLAGS="\$LDFLAGS -Xlinker -rpath -Xlinker `pwd`"'];
+        opts = [opts ' LDFLAGS="\$LDFLAGS -Xlinker -rpath -Xlinker ."'];
     end
     
     sourceFiles = dir(fullfile(projectDir, '*.cpp'));

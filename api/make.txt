@@ -1,8 +1,9 @@
 To build the dylib (OS X only):
-g++ -dynamiclib -undefined suppress -flat_namespace API.cpp usb.cpp hidapi-master/mac/hid.o -Ihidapi-master/mac/include/hidapi -framework CoreFoundation -framework IOkit -install_name @rpath/liblcr.dylib -o liblcr.dylib
+g++ -dynamiclib -undefined suppress -flat_namespace API.cpp usb.cpp hidapi-master/mac/hid.o -Ihidapi-master/mac/include/hidapi -framework CoreFoundation -framework IOkit -install_name @executable_path/liblcr.dylib -o liblcr.dylib
 
 When you build the mex files, these options need to be included in LDFLAGS:
 -Xlinker -rpath -Xlinker `pwd`
+(Not necessary anymore?)
 
 To build the dll (Windows only):
 cl /Felcr /I hidapi-master/hidapi API.cpp usb.cpp hidapi-master/windows/hid.c SetupAPI.lib /LD
