@@ -16,6 +16,7 @@ function make(rebuild)
     
     if ismac
         opts = [opts ' LDFLAGS="\$LDFLAGS -Xlinker -rpath -Xlinker ."'];
+        opts = [opts ' CXXFLAGS="\$CXXFLAGS -std=c++11"'];
     end
     
     sourceFiles = dir(fullfile(projectDir, '*.cpp'));
