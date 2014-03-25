@@ -38,8 +38,8 @@ CmdFormat CmdList[255] =
     {   0x1A,  0x0A,  0x00   },      //STATUS_HW,
     {   0x1A,  0x0B,  0x00   },      //STATUS_SYS,
     {   0x1A,  0x0C,  0x00   },      //STATUS_MAIN,
-    {   0,  0,  0   },      //CSC_DATA,
-    {   0,  0,  0   },      //GAMMA_CTL,
+    {   0x1A,  0x0D,  0x13   },      //CSC_DATA,
+    {   0x1A,  0x0E,  0x01   },      //GAMMA_CTL,
     {   0,  0,  0   },      //BC_CTL,
     {   0x1A,  0x10,  0x01   },      //PWM_ENABLE,
     {   0x1A,  0x11,  0x06   },      //PWM_SETUP,
@@ -3355,4 +3355,68 @@ int LCR_MemWrite(unsigned int addr, unsigned int data)
          return 0;
      }
      return -1;
+ }
+
+ // ADDITIONS BY MARK CAFARO
+ 
+ int LCR_GetGammaCorrection(unsigned char *pTable, bool *pEnable)
+/**
+ * @return  >=0 = PASS    <BR>
+ *          <0 = FAIL  <BR>
+ *
+ */
+ {
+     hidMessageStruct msg;
+	 
+	 LCR_PrepReadCmd(GAMMA_CTL);
+	 
+     if(LCR_Read() > 0)
+     {
+		memcpy(&msg, InputBuffer, 65);
+		*pTable = msg.text.data[0] & (BIT0 | BIT1 | BIT2 | BIT3);
+		*pEnable = msg.text.data[0] >> 7;
+		return 0;
+	 }
+	 return -1; 
+ }
+ 
+ int LCR_SetGammaCorrection(unsigned char table, bool enable)
+/**
+ * @return  >=0 = PASS    <BR>
+ *          <0 = FAIL  <BR>
+ *
+ */
+ {
+	hidMessageStruct msg;
+	
+	msg.text.data[2] = table & (BIT0 | BIT1 | BIT2 | BIT3);
+    msg.text.data[2] |= enable << 7;
+	LCR_PrepWriteCmd(&msg, GAMMA_CTL);
+	
+	return LCR_SendMsg(&msg);
+ }
+ 
+ int LCR_GetColorSpaceConversion(unsigned char *pAttr, unsigned short *pCoefficients)
+ /**
+ * @return  >=0 = PASS    <BR>
+ *          <0 = FAIL  <BR>
+ *
+ */
+ {
+	hidMessageStruct msg;
+	
+	LCR_PrepReadCmd(CSC_DATA);
+	
+     if(LCR_Read() > 0)
+     {
+		memcpy(&msg, InputBuffer, 65);
+		*pAttr = msg.text.data[0] & (BIT0 | BIT1);
+		
+		for (int i = 0; i < 10; i++)
+		{
+			pCoefficients[i] = msg.text.data[(i*2)+2] | msg.text.data[(i*2)+1] << 8;
+		}
+		return 0;
+	 }
+	 return -1; 
  }

@@ -261,5 +261,8 @@ int API_API_EXPORT LCR_SetGeneralPurposeClockOutFreq(unsigned int clkId, bool en
 int API_API_EXPORT LCR_GetGeneralPurposeClockOutFreq(unsigned int clkId, bool *pEnabled, unsigned int *pClkDivider);
 int API_API_EXPORT LCR_MeasureSplashLoadTiming(unsigned int startIndex, unsigned int numSplash);
 int API_API_EXPORT LCR_ReadSplashLoadTiming(unsigned int *pTimingData);
+int API_API_EXPORT LCR_GetGammaCorrection(unsigned char *pTable, bool *pEnable);
+int API_API_EXPORT LCR_SetGammaCorrection(unsigned char table, bool enable);
+int API_API_EXPORT LCR_GetColorSpaceConversion(unsigned char *pAttr, unsigned short *pCoefficients);
 
 #endif // API_H
