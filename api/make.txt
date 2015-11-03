@@ -1,6 +1,10 @@
 To build the dylib (OS X only):
 g++ -dynamiclib -undefined suppress -flat_namespace dlpc350_api.cpp dlpc350_usb.cpp hidapi-master/mac/hid.o -Ihidapi-master/mac/include/hidapi -framework CoreFoundation -framework IOkit -install_name @executable_path/liblcr.dylib -o liblcr.dylib
 
+Build hid.o if it doesn't already exist:
+cd hidapi-master/mac
+make -f Makefile-manual
+
 When you build the mex files, these options need to be included in LDFLAGS:
 -Xlinker -rpath -Xlinker `pwd`
 (Not necessary anymore?)
