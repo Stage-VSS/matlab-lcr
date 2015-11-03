@@ -9,7 +9,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     }
     
     unsigned int status;
-    int result = LCR_ValidatePatLutData(&status);
+    int result = DLPC350_ValidatePatLutData(&status);
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToValidatePatLutData", "Failed to validate pattern LUT data");

@@ -11,7 +11,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     unsigned char hwStatus;
 	unsigned char sysStatus;
 	unsigned char mainStatus;
-    int result = LCR_GetStatus(&hwStatus, &sysStatus, &mainStatus);
+    int result = DLPC350_GetStatus(&hwStatus, &sysStatus, &mainStatus);
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToGetStatus", "Failed to get status");

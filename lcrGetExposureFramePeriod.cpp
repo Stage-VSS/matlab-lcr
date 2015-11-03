@@ -10,7 +10,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     
     unsigned int exposurePeriod;
     unsigned int framePeriod;
-    int result = LCR_GetExposure_FramePeriod(&exposurePeriod, &framePeriod);
+    int result = DLPC350_GetExposure_FramePeriod(&exposurePeriod, &framePeriod);
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToGetExposureFramePeriod", "Failed to get exposure/frame period");

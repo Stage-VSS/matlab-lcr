@@ -8,7 +8,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         return;
     }
     
-    int result = LCR_ClearPatLut();
+    int result = DLPC350_ClearPatLut();
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToClearPatLut", "Failed to clear stored pattern LUT");

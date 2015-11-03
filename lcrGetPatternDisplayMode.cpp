@@ -9,7 +9,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     }
     
     bool external;
-    int result = LCR_GetPatternDisplayMode(&external);
+    int result = DLPC350_GetPatternDisplayMode(&external);
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToGetPatternDisplayMode", "Failed to get pattern display mode");

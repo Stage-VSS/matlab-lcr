@@ -10,7 +10,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     
     bool flip = mxGetScalar(prhs[0]);
     
-    int result = LCR_SetShortAxisImageFlip(flip);
+    int result = DLPC350_SetShortAxisImageFlip(flip);
     if (result < 0)
     {
         mexErrMsgIdAndTxt("lcr:failedToSetShortAxisImageFlip", "Failed to set short axis image flip");

@@ -9,7 +9,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     }
     
     bool mode;
-    int result = LCR_GetMode(&mode);
+    int result = DLPC350_GetMode(&mode);
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToGetMode", "Failed to get mode");

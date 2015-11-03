@@ -7,11 +7,11 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         mexErrMsgIdAndTxt("lcr:usage", "Usage: lcrClose()");
         return;
     }
-    
-    if (USB_IsConnected())
+
+    if (DLPC350_USB_IsConnected())
     {
-        USB_Close();
+        DLPC350_USB_Close();
     }
-    
-    USB_Exit();
+
+    DLPC350_USB_Exit();
 }

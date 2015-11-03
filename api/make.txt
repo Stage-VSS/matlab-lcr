@@ -1,9 +1,31 @@
 To build the dylib (OS X only):
-g++ -dynamiclib -undefined suppress -flat_namespace API.cpp usb.cpp hidapi-master/mac/hid.o -Ihidapi-master/mac/include/hidapi -framework CoreFoundation -framework IOkit -install_name @executable_path/liblcr.dylib -o liblcr.dylib
+g++ -dynamiclib -undefined suppress -flat_namespace dlpc350_api.cpp dlpc350_usb.cpp hidapi-master/mac/hid.o -Ihidapi-master/mac/include/hidapi -framework CoreFoundation -framework IOkit -install_name @executable_path/liblcr.dylib -o liblcr.dylib
+
+Build hid.o if it doesn't already exist:
+cd hidapi-master/mac
+make -f Makefile-manual
 
 When you build the mex files, these options need to be included in LDFLAGS:
 -Xlinker -rpath -Xlinker `pwd`
 (Not necessary anymore?)
 
 To build the dll (Windows only):
-cl /Felcr /I hidapi-master/hidapi API.cpp usb.cpp hidapi-master/windows/hid.c SetupAPI.lib /LD
+cl /Felcr /I hidapi-master/hidapi dlpc350_api.cpp dlpc350_usb.cpp hidapi-master/windows/hid.c SetupAPI.lib /LD
+
+(FOR WINDOWS)
+Make sure you modify the API to include dllexport so they function actually end up in the dll/
+
+In .h file add:
+
+#ifdef _WIN32
+      #define DLPC350_API_EXPORT __declspec(dllexport)
+      #define DLPC350_API_CALL
+#else
+      #define DLPC350_API_EXPORT /**< API export macro */
+      #define DLPC350_API_CALL /**< API call macro */
+#endif
+
+In .h file modify functions from:
+int  DLPC350_GetVideoSignalStatus(VideoSigStatus *vidSigStat);
+to:
+int  DLPC350_API_EXPORT DLPC350_GetVideoSignalStatus(VideoSigStatus *vidSigStat);

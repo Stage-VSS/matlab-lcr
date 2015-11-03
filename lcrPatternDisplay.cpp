@@ -10,7 +10,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     
     int action = mxGetScalar(prhs[0]);
     
-    int result = LCR_PatternDisplay(action);
+    int result = DLPC350_PatternDisplay(action);
     if (result < 0)
     {
         mexErrMsgIdAndTxt("lcr:failedToSetPatternDisplay", "Failed to set pattern display");
