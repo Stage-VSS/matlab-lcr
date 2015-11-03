@@ -11,7 +11,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     unsigned char red;
     unsigned char green;
     unsigned char blue;
-    int result = LCR_GetLedCurrents(&red, &green, &blue);
+    int result = DLPC350_GetLedCurrents(&red, &green, &blue);
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToGetLedCurrents", "Failed to get LED currents");

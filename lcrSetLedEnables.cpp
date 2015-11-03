@@ -13,7 +13,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     bool green = mxGetScalar(prhs[2]);
     bool blue = mxGetScalar(prhs[3]);
     
-    int result = LCR_SetLedEnables(seqCtrl, red, green, blue);
+    int result = DLPC350_SetLedEnables(seqCtrl, red, green, blue);
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToSetLedEnables", "Failed to set LED enables");

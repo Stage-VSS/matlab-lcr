@@ -2,7 +2,8 @@
 #define LCR_H
 
 #include <mex.h>
-#include "usb.h"
-#include "API.h"
+#include "dlpc350_common.h"
+#include "dlpc350_usb.h"
+#include "dlpc350_api.h"
 
 #endif // #ifndef LCR_H

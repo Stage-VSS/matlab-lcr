@@ -12,7 +12,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     unsigned char greenCurrent = mxGetScalar(prhs[1]);
     unsigned char blueCurrent = mxGetScalar(prhs[2]);
     
-    int result = LCR_SetLedCurrents(redCurrent, greenCurrent, blueCurrent);
+    int result = DLPC350_SetLedCurrents(redCurrent, greenCurrent, blueCurrent);
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToSetLedCurrents", "Failed to set LED currents");

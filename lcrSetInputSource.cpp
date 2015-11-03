@@ -11,7 +11,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     unsigned int source = mxGetScalar(prhs[0]);
     unsigned int portWidth = mxGetScalar(prhs[1]);
     
-    int result = LCR_SetInputSource(source, portWidth);
+    int result = DLPC350_SetInputSource(source, portWidth);
     if (result < 0)
     {
         mexErrMsgIdAndTxt("lcr:failedToSetInputSource", "Failed to set input source");

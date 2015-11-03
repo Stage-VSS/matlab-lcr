@@ -10,7 +10,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     
     bool standby = mxGetScalar(prhs[0]);
     
-    int result = LCR_SetPowerMode(standby);
+    int result = DLPC350_SetPowerMode(standby);
     if (result < 0)
     {
         mexErrMsgIdAndTxt("lcr:failedToSetPowerMode", "Failed to set power mode");

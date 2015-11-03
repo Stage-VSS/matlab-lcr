@@ -33,8 +33,9 @@ function make(rebuild)
 
             try
                 eval(command);
-            catch
+            catch x
                 disp(['Error compiling ''' source.name '''']);
+                disp(x.message);
             end
         else
             disp([source.name ' is up to date']);

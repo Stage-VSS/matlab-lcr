@@ -10,7 +10,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     
     unsigned int source;
     unsigned int portWidth;
-    int result = LCR_GetInputSource(&source, &portWidth);
+    int result = DLPC350_GetInputSource(&source, &portWidth);
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToGetInputSource", "Failed to get input source");

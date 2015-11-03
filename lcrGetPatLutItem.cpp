@@ -18,7 +18,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     bool insertBlack;
     bool bufSwap;
     bool trigOutPrev;
-    int result = LCR_GetPatLutItem(index, &trigType, &patNum, &bitDepth, &ledSelect, &invertPat, &insertBlack, &bufSwap, &trigOutPrev);
+    int result = DLPC350_GetPatLutItem(index, &trigType, &patNum, &bitDepth, &ledSelect, &invertPat, &insertBlack, &bufSwap, &trigOutPrev);
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToGetPatLutItem", "Failed to get pattern LUT item");

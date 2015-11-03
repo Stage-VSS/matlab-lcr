@@ -8,7 +8,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         return;
     }
     
-    int result = LCR_SendPatLut();
+    int result = DLPC350_SendPatLut();
     if (result == -1)
     {
         mexErrMsgIdAndTxt("lcr:failedToSendPatLut", "Failed to send pattern LUT");

@@ -13,7 +13,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     unsigned int numPatsForTrigOut2 = mxGetScalar(prhs[2]);
     unsigned int numSplash = mxGetScalar(prhs[3]);
     
-    int result = LCR_SetPatternConfig(numLutEntries, repeat, numPatsForTrigOut2, numSplash);
+    int result = DLPC350_SetPatternConfig(numLutEntries, repeat, numPatsForTrigOut2, numSplash);
     if (result < 0)
     {
         mexErrMsgIdAndTxt("lcr:failedToSetPatternConfig", "Failed to set pattern config");

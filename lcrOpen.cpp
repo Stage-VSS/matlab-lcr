@@ -1,12 +1,12 @@
 #include "lcr.h"
 
 void cleanup(void) {
-    if (USB_IsConnected())
+    if (DLPC350_USB_IsConnected())
     {
-        USB_Close();
+        DLPC350_USB_Close();
     }
-    
-    USB_Exit();
+
+    DLPC350_USB_Exit();
 }
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
@@ -16,19 +16,19 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         mexErrMsgIdAndTxt("lcr:usage", "Usage: lcrOpen()");
         return;
     }
-    
-    USB_Init();
-    if (USB_IsConnected())
+
+    DLPC350_USB_Init();
+    if (DLPC350_USB_IsConnected())
     {
-        USB_Close();
+        DLPC350_USB_Close();
     }
-    
-    USB_Open();
-    if (!USB_IsConnected())
+
+    DLPC350_USB_Open();
+    if (!DLPC350_USB_IsConnected())
     {
         mexErrMsgIdAndTxt("lcr:failedToOpen", "Failed to open");
         return;
     }
-    
+
     mexAtExit(cleanup);
 }
