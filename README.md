@@ -1,6 +1,6 @@
 # matlab-lcr
 
-[LightCrafter 4500](http://www.ti.com/tool/dlplcr4500evm) API bindings for Matlab.
+[LightCrafter 4500](http://www.ti.com/tool/dlplcr4500evm) API bindings for MATLAB.
 
 ## Requirements
 
